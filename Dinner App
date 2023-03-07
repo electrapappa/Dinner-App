@@ -1,0 +1,45 @@
+import random
+from tkinter import *
+
+veggiedinner = ["mac and cheese", "a salad", "a pizza"]
+meatdinner = ["a steak", "a burger", "sushi"]
+anything = ["a steak", "a burger", "sushi","mac and cheese", "a salad", "a pizza"]
+
+root = Tk()
+root.geometry("300x300")
+root.title("Dinner App")
+
+preference = StringVar()  
+
+def ClickButton():
+    if preference.get() == "veggie":
+        text["text"] = "You can eat " + random.choice(veggiedinner)
+    elif preference.get() == "meat eater":
+        text["text"] = "You can eat " + random.choice(meatdinner)
+    elif preference.get() == "no preference":
+        text["text"] = "You can eat " + random.choice(anything)
+    else:
+        text["text"] = ""
+
+text = Label(root, font=("Arial, 14"), fg="purple", pady=20)
+
+question = Label(text = "Any dietary requirements?").place(x = 65, y = 40) 
+
+
+veggie_button = Radiobutton(root, text="veggie", variable=preference, value="veggie")
+meat_button = Radiobutton(root, text="meat eater", variable=preference, value="meat eater")
+anything_button = Radiobutton(root, text="no preference", variable=preference, value="no preference")
+
+text.pack()
+veggie_button.pack()
+meat_button.pack()
+anything_button.pack()
+# set no preference to default
+anything_button.invoke()
+
+Button(text='Suggest', command=ClickButton, padx=15, pady=8).pack(pady=8)
+
+root.mainloop() 
+
+
+
